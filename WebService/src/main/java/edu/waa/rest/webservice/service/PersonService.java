@@ -32,4 +32,20 @@ public class PersonService {
 		personRepository.delete(person);
 	}
 
+	public List<Person> getAllPerson(){return personRepository.findAll();}
+
+	public boolean updatePerson(Person old, Person person){
+		boolean result = false;
+		if(old != null){
+			old.setPhone(person.getPhone());
+			old.setLastName(person.getLastName());
+			old.setFirstName(person.getFirstName());
+			old.setEnable(person.isEnable());
+			old.setEmail(person.getEmail());
+			old.setAddress(person.getAddress());
+			result = true;
+		}
+		return result;
+	}
+
 }

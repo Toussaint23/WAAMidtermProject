@@ -48,5 +48,22 @@ public class ProductService   {
 	public List<Product> findByProductType(ProductType productType) {
 		 return productRepository.findByProductType(productType);
 	}
-	
+
+	public Product deleteProduct(int productId){
+		Product product = productRepository.getOne(productId);
+		productRepository.delete(product);
+		return product;
+	}
+
+	public boolean updateProduct(Product oldProduct, Product newProduct) {
+		boolean result = false;
+		if(oldProduct != null){
+			oldProduct.setDescription(newProduct.getDescription());
+			oldProduct.setPrice(newProduct.getPrice());
+			oldProduct.setProductName(newProduct.getProductName());
+			oldProduct.setProductType(newProduct.getProductType());
+			result = true;
+		}
+		return result;
+	}
 }
