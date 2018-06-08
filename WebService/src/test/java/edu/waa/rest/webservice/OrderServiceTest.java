@@ -5,6 +5,10 @@ import static org.junit.Assert.fail;
 import java.util.Date;
 import java.util.List;
 
+import edu.waa.rest.webservice.domain.*;
+import edu.waa.rest.webservice.service.OrderService;
+import edu.waa.rest.webservice.service.PersonService;
+import edu.waa.rest.webservice.service.ProductService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,15 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import edu.mum.coffee.domain.Address;
-import edu.mum.coffee.domain.Order;
-import edu.mum.coffee.domain.Orderline;
-import edu.mum.coffee.domain.Person;
-import edu.mum.coffee.domain.Product;
-import edu.mum.coffee.domain.ProductType;
-import edu.mum.coffee.service.OrderService;
-import edu.mum.coffee.service.PersonService;
-import edu.mum.coffee.service.ProductService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

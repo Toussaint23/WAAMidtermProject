@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import edu.waa.rest.webservice.domain.Address;
+import edu.waa.rest.webservice.domain.Person;
+import edu.waa.rest.webservice.service.PersonService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +14,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import edu.mum.coffee.domain.Address;
-import edu.mum.coffee.domain.Person;
-import edu.mum.coffee.service.PersonService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
