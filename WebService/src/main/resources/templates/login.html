@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+</head>
+<body>
+<form method="post" action="/addproduct" ><!-- th:object="${product}" -->
+    <div>
+        <label for="username">Username</label>
+        <input name="userName"  id="username" required><!-- th:field="*{productName}"-->
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input name="password" id="password" type="password" required> <!--  th:field="*{description}"-->
+    </div>
+    <div>
+        <input  value="Submit" type="submit"> <!--  th:value="#{product.button.add}" -->
+    </div>
+</form>
+</body>
+</html>
