@@ -27,7 +27,7 @@ public class ProductService   {
 	}
 
 	public Product getProduct(int productId){
-		return  productRepository.getOne(productId);//.findOne(productId);
+		return  productRepository.findById(productId).get();//.findOne(productId);
 	}
 
 	public List<Product> getAllProduct() {
@@ -50,7 +50,7 @@ public class ProductService   {
 	}
 
 	public Product deleteProduct(int productId){
-		Product product = productRepository.getOne(productId);
+		Product product = productRepository.findById(productId).get();
 		productRepository.delete(product);
 		return product;
 	}

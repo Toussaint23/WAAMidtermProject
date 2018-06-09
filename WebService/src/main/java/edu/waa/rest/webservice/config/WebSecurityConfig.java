@@ -1,5 +1,5 @@
 package edu.waa.rest.webservice.config;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home", "/index", "/listperson").permitAll()
+                .antMatchers("/", "/home", "/index", "/newperson").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -32,3 +32,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication().withUser("super").password("pw").roles("ADMIN");
 	}
 }
+*/

@@ -21,7 +21,7 @@ public class ServiceController {
     OrderService orderService;
 
     @PostMapping(value = "/newproduct")
-    public Product addProduct(Product product) {
+    public Product addProduct(@RequestBody Product product) {
         return productService.save(product);
     }
 
@@ -30,19 +30,23 @@ public class ServiceController {
         return  productService.getAllProduct();
     }
 
+    @GetMapping(value = "/findproduct/{id}")
+    public @ResponseBody Product findProductById(@PathVariable int id){
+        return productService.getProduct(id);
+    }
     @PutMapping(value = "/updateproduct/{id}")
-    public boolean updateProduct(@PathVariable int id, Product newProduct){
+    public boolean updateProduct(@PathVariable int id, @RequestBody Product newProduct){
         Product oldProduct = productService.getProduct(id);
         return productService.updateProduct(oldProduct, newProduct);
     }
 
     @DeleteMapping(value = "/deleteproduct/{id}")
-    public Product deleteProduct(@PathVariable int id){
+    public @ResponseBody Product deleteProduct(@PathVariable int id){
         return productService.deleteProduct(id);
     }
 
     @PostMapping(value = "/newperson")
-    public Person addPerson(Person person) {
+    public @ResponseBody Person addPerson(@RequestBody Person person) {
         return personService.savePerson(person);
     }
 
@@ -52,13 +56,13 @@ public class ServiceController {
     }
 
     @PutMapping(value = "/updateperson/{id}")
-    public boolean updatePerson(@PathVariable long id, Person newPerson){
+    public boolean updatePerson(@PathVariable long id, @RequestBody Person newPerson){
         Person oldPerson = personService.findById(id);
         return personService.updatePerson(oldPerson, newPerson);
     }
 
     @PostMapping(value = "/neworder")
-    public Order addOrder(Order order) {
+    public Order addOrder(@RequestBody Order order) {
         return orderService.save(order);
     }
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Products in the stock</title>
+    </head>
+    <body>
+        <h1>WELCOME TO THIS SPECIAL PAGE</h1>
+        <h2>Products in the stock</h2>
+        <table th:if="${products != null}" th:object= "${products}">
+            <tr th:each="item : ${products}">
+                <td th:text="${item.productName}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.productType}"></td>
+                <td th:text="${item.price}"></td>
+                <td><a href="#" th:href="|/editproduct/${item.id}|" th:text="Edit"></a></td>
+                <td><a href="#" th:href="|/deleteproduct/${item.id}|" th:text="Delete"></a></td>
+            </tr>
+        </table>
+        <a href="/addproduct">Add product</a>
+    </body>
+</html>
