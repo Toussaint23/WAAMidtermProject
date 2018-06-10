@@ -15,21 +15,22 @@
 
 
         <div style="margin: 30px 0px 0px 300px">
-            <h2>Products in the stock</h2>
+            <h2>List Orders</h2>
             <table th:if="${orders != null}" th:object= "${orders}" cellspacing="15px">
                 <tr style="font-weight: bold; text-transform: uppercase; border-bottom: thick silver solid;">
                     <td colspan="2">Client</td>
                     <td>Date</td>
+                    <td>Product</td>
+                    <td>Quantity</td>
                     <td colspan="2"></td>
                 </tr>
                 <tr th:each="item : ${orders}">
                     <td th:text="${item.person.firstName}"></td>
                     <td th:text="${item.person.lastName}"></td>
                     <td th:text="${item.orderDate}"></td>
-                    <!--td th:text="${item.}"></td-->
-                    <!--td th:text="${item.}"></td>
-                    <td th:if="${#authorization.expr('hasAuthority(''ADMIN'')')}"><a href="#" th:href="|/editlocalproduct/${item.id}|" th:text="#{label.link.edit}"></a></td>
-                    <td th:if="${#authorization.expr('hasAuthority(''ADMIN'')')}"><a href="#" th:href="|/deletelocalproduct/${item.id}|" th:text="#{label.link.delete}"></a></td!-->
+                    <td th:each="orderline : ${item.orderLines}" th:text="${orderline.product.productName}"></td>
+                    <td th:each="orderline : ${item.orderLines}" th:text="${orderline.quantity}"></td>
+                    <td>
                 </tr>
             </table>
         </div>
