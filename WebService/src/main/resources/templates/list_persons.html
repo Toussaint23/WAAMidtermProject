@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Products in the stock</title>
+    </head>
+    <body>
+        <h1>WELCOME TO THE PAGE</h1>
+        <div th:replace="~{menu::menu-admin}">...</div>
+        <!--div th:replace="${#authentication.principal.isAdmin()} ? ~{fragments/footer :: footer-admin} : ~{fragments/footer :: footer-admin}">
+            &copy; 2016 The Static Templates
+        </div-->
+        <div style="margin: 30px 0px 0px 300px">
+            <h2>List of Person</h2>
+            <table th:if="${people != null}" th:object= "${people}" cellspacing="15px">
+                <tr style="font-weight: bold; text-transform: uppercase; border-bottom: thick silver solid;">
+                    <td>Firstname</td>
+                    <td>Lastname</td>
+                    <td>Email</td>
+                    <td>City</td>
+                    <td>State</td>
+                    <td>Country</td>
+                    <td>Zip Code</td>
+                    <td>Phone</td>
+                    <td>Active</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr th:each="item : ${people}">
+                    <td th:text="${item.firstName}"></td>
+                    <td th:text="${item.lastName}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.address.city}"></td>
+                    <td th:text="${item.address.state}"></td>
+                    <td th:text="${item.address.country}"></td>
+                    <td th:text="${item.address.zipcode}"></td>
+                    <td th:text="${item.phone}"></td>
+                    <td th:text="${item.enable}"></td>
+                    <td><a href="#" th:href="|/editlocalperson/${item.id}|" th:text="#{label.link.edit}"></a></td>
+                    <td><a href="#" th:href="|/deletelocalperson/${item.id}|" th:text="#{label.link.delete}"></a></td>
+                </tr>
+                <tr><td colspan="6"><a href="/addperson">Add person</a></td></tr>
+            </table>
+        </div>
+    </body>
+</html>

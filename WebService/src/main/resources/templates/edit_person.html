@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            label{
+                display: block;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-style: italic;
+            }
+            input, select{
+                width: 350px;
+                height: 25px;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+    <div th:replace="~{menu::menu-admin}">...</div>
+
+    <!--div th:replace="${#authentication.principal.isAdmin()} ? ~{fragments/footer :: footer-admin} : ~{fragments/footer :: footer-admin}">
+        &copy; 2016 The Static Templates
+    </div-->
+    <div style="margin: 30px 0px 0px 300px">
+        <h2>Edit Account</h2>
+        <form method="post" action="" th:object="${person}" th:action="|/editlocalperson/*{id}|">
+            <div>
+                <label for="firstname">Firstname</label>
+                <input name="firstName"  id="firstname" th:field="*{firstName}" required>
+            </div>
+            <div>
+                <label for="lastname">lastname</label>
+                <input name="lastName"  id="lastname" th:field="*{lastName}" required>
+            </div>
+            <div>
+                <label for="email">email</label>
+                <input name="email" id="email" th:field="*{email}" required>
+            </div>
+            <div>
+                <label for="city">City</label>
+                <input name="city" id="city" th:field="*{address.city}" required>
+            </div>
+            <div>
+                <label for="state">State</label>
+                <input name="state" id="state" th:field="*{address.state}" required>
+            </div>
+            <div>
+                <label for="country">Country</label>
+                <input name="country" id="country" th:field="*{address.country}" required>
+            </div>
+            <div>
+                <label for="zipcode">Zip Code</label>
+                <input name="zipcode" id="zipcode" th:field="*{address.zipcode}" required>
+            </div>
+            <div>
+                <label for="phone">phone</label>
+                <input name="phone"  id="phone" th:field="*{phone}" required>
+            </div>
+            <div>
+                <label>
+                    Active
+                    <input name="enable" th:field="*{enable}" type="checkbox">
+                </label>
+            </div>
+            <div>
+                <input  value="" th:value="#{person.button.edit}" type="submit">
+            </div>
+        </form>
+    </div>
+    </body>
+</html>

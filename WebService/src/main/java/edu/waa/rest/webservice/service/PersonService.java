@@ -25,7 +25,7 @@ public class PersonService {
 	}
 
 	public Person findById(Long id) {
-		return personRepository.getOne(id);//.findOne(id);
+		return personRepository.findById(id).get();//.findOne(id);
 	}
 
 	public void removePerson(Person person) {

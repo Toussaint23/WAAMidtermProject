@@ -1,12 +1,7 @@
 package edu.waa.rest.webservice.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -16,6 +11,7 @@ public class Person {
 	private long id;
 	private String firstName;
 	private String lastName;
+	@Email
 	private String email;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
