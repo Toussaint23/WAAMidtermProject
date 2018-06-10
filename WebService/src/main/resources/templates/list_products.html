@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>Products in the stock</title>
     </head>
     <body>
         <h1>WELCOME TO THE PAGE</h1>
-        <div th:replace="~{menu::menu-admin}">...</div>
-        <!--div th:replace="${#authentication.principal.isAdmin()} ? ~{fragments/footer :: footer-admin} : ~{fragments/footer :: footer-admin}">
-            &copy; 2016 The Static Templates
-        </div-->
+
+        <div th:replace="${#authorization.expr('hasAuthority(''ADMIN'')')} ? ~{menu::menu-admin}
+                            : (${#authorization.expr('hasAuthority(''USER'')')} ? ~{menu::menu-user}
+                            : ~{menu::menu-anonymous})">
+        </div>
+
+
         <div style="margin: 30px 0px 0px 300px">
             <h2>Products in the stock</h2>
             <table th:if="${products != null}" th:object= "${products}" cellspacing="15px">
@@ -25,11 +28,12 @@
                     <td th:text="${item.description}"></td>
                     <td th:text="${item.productType}"></td>
                     <td th:text="${item.price}"></td>
-                    <td><a href="#" th:href="|/editlocalproduct/${item.id}|" th:text="#{label.link.edit}"></a></td>
-                    <td><a href="#" th:href="|/deletelocalproduct/${item.id}|" th:text="#{label.link.delete}"></a></td>
+                    <td th:if="${#authorization.expr('hasAuthority(''ADMIN'')')}"><a href="#" th:href="|/editlocalproduct/${item.id}|" th:text="#{label.link.edit}"></a></td>
+                    <td th:if="${#authorization.expr('hasAuthority(''ADMIN'')')}"><a href="#" th:href="|/deletelocalproduct/${item.id}|" th:text="#{label.link.delete}"></a></td>
                 </tr>
-                <tr><td colspan="6"><a href="/addproduct">Add product</a></td></tr>
+                <tr th:if="${#authorization.expr('hasAuthority(''ADMIN'')')}"><td colspan="6"><a href="/addproduct">Add product</a></td></tr>
             </table>
         </div>
+
     </body>
 </html>

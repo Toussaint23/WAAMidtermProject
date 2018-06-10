@@ -36,8 +36,7 @@ public class PersonController {
 	@PostMapping({"/registration"})
 	public String createNewUser(@Valid Person person, BindingResult bindingResult, Model model, @RequestParam String userType) {
 		User userExists = userService.findUserByEmail(person.getEmail());
-		System.out.println(userType);
-		String view = "registration";
+		String view = (userType.equalsIgnoreCase("admin")) ? "redirect:/" : "registration";
 		if (userExists != null) {
 			bindingResult
 					.rejectValue("email", "error.user",
