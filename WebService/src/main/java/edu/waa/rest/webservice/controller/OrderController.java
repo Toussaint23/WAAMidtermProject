@@ -55,8 +55,6 @@ public class OrderController {
 		return "list_products";
 	}
 
-
-
 	@GetMapping({"/listorders"})
 	public String people(Model model) {
 		List<Order> orderList = orderService.findAll();
@@ -64,39 +62,4 @@ public class OrderController {
 		return "list_orders";
 	}
 
-	/*@GetMapping({"/editlocalperson"})
-	public String myInfoView(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Person person = personService.findByEmail(auth.getName().trim());
-		model.addAttribute("person", person);
-		return "personal";
-	}
-
-	@GetMapping({"/editlocalperson/{id}"})
-	public String editPersonView(@PathVariable long id, Model model) {
-		Person person = personService.findById(id);
-		model.addAttribute("person", person);
-		return "personal";
-	}
-
-	@PostMapping({"/editlocalperson"})
-	public String myInfo(Person person) {
-		Person result = personService.findByEmail(person.getEmail());
-		String view = (personService.updatePerson(result, person)) ? "redirect:/" : "/editlocalperson";
-		return view;
-	}
-
-
-	@GetMapping({"/deletelocalperson/{id}"})
-	public String deletePersonView(@PathVariable long id, Model model) {
-		Person person= personService.findById(id);
-		model.addAttribute("person", person);
-		return "delete_personal";
-	}
-
-	@PostMapping({"/deletelocalperson/{id}"})
-	public String deletePerson(@PathVariable long id) {
-		personService.removePerson(personService.findById(id));
-		return"redirect:/listpersons";
-	}*/
 }
