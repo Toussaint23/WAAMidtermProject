@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container" style="display: inline">
+    <form style="margin: 30px 0px 0px 30px" action="/addorder" method="post">
+        <h2>Products availaible</h2>
+        <table th:if="${products != null}" th:object= "${orderline}" cellspacing="15px" style="float: left">
+            <tr>
+                <td>
+                    <select name="productId">
+                        <option th:each="item : ${products}" th:value="${item.id}"  th:text="${item.productName}"></option>
+                    </select>
+                </td>
+                <td><input type="number" name="quantity" placeholder="Quantity" /></td>
+            </tr>
+            <tr>
+                <td colspan="5"><button class="btn-basic" type="Submit">Order</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

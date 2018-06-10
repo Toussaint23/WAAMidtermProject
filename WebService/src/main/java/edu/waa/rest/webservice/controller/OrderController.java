@@ -1,73 +1,70 @@
 package edu.waa.rest.webservice.controller;
 
 import edu.waa.rest.webservice.domain.Order;
+import edu.waa.rest.webservice.domain.Orderline;
 import edu.waa.rest.webservice.domain.Person;
-import edu.waa.rest.webservice.domain.User;
+import edu.waa.rest.webservice.domain.Product;
 import edu.waa.rest.webservice.service.OrderService;
 import edu.waa.rest.webservice.service.PersonService;
+import edu.waa.rest.webservice.service.ProductService;
 import edu.waa.rest.webservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
 public class OrderController {
 	@Autowired
 	OrderService orderService;
-
 	@Autowired
 	UserService userService;
+	@Autowired
+	ProductService productService;
+	@Autowired
+	PersonService personService;
 
 	@GetMapping({"/addorder"})
 	public String addPersonView(Model model) {
-		model.addAttribute("order", new Order());
-		return "add_ordern";
+		model.addAttribute("products", productService.getAllProduct());
+		model.addAttribute("orderline", new Orderline());
+		return "add_order";
 	}
 
-	/*@PostMapping({"/registration"})
-	public String createNewUser(@Valid Person person, BindingResult bindingResult, Model model, @RequestParam String userType) {
-		User userExists = userService.findUserByEmail(person.getEmail());
-		System.out.println(userType);
-		String view = "registration";
-		if (userExists != null) {
-			bindingResult
-					.rejectValue("email", "error.user",
-							"There is already a user registered with the email provided");
-		}
-		if (!bindingResult.hasErrors()) {
-			userService.setUser(person.getAccount(), userType, person.getEmail());
-			personService.savePerson(person);
-			model.addAttribute("successMessage", "User has been registered successfully");
-			model.addAttribute("person", new Person());
-		}
-		return view;
+	@PostMapping({"/addorder"})
+	public String createNewUser(@RequestParam int productId, @RequestParam int quantity) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Person person = personService.findByEmail(auth.getName().trim());
+		Product product = productService.getProduct(productId);
+		Orderline orderline= new Orderline();
+		Order order = new Order();
+		orderline.setProduct(product);
+		orderline.setQuantity(quantity);
+		order.setPerson(person);
+		order.setOrderDate(new java.util.Date());
+		orderline.setOrder(order);
+		order.addOrderLine(orderline);
+		orderService.save(order);
+		return "list_products";
 	}
 
-	@PostMapping({"/addperson"})
-	public String addPerson(Person person) {
-		Person result = personService.savePerson(person);
-		String view = (result != null ) ? "redirect:/home" : "/addperson";
-		return view;
-	}
 
-	@GetMapping({"/listpersons"})
+
+	@GetMapping({"/listorders"})
 	public String people(Model model) {
-		List<Person> personList = personService.getAllPerson();
-		model.addAttribute("people",personList);
-		return "list_persons";
+		List<Order> orderList = orderService.findAll();
+		model.addAttribute("orders",orderList);
+		return "list_orders";
 	}
 
-	@GetMapping({"/editlocalperson"})
+	/*@GetMapping({"/editlocalperson"})
 	public String myInfoView(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findByEmail(auth.getName().trim());
