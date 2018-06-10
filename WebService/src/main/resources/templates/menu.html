@@ -6,11 +6,9 @@
     </head>
     <body>
 
-         <!--h1 sec:authorize="isAuthenticated()" th:fragment="welcome">
-                | Logged user: <span sec:authentication="name" th:text="${principal.username}"></span> |
-                Roles: <span sec:authentication="principal.authorities" th:text="principal.name"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
-         </h1-->
+         <h1 sec:authorize="isAuthenticated()" th:fragment="welcome">
+                WELCOME TO THE PAGE <span sec:authentication="authorities"></span>
+         </h1>
 
          <div th:fragment="menu-anonymous" style="float: left">
              <h2>Menu</h2>

@@ -5,7 +5,8 @@
         <title>Products in the stock</title>
     </head>
     <body>
-        <h1>WELCOME TO THE PAGE</h1>
+
+        <h1 th:replace="~{menu::welcome}">WELCOME TO THE PAGE</h1>
 
         <div th:replace="${#authorization.expr('hasAuthority(''ADMIN'')')} ? ~{menu::menu-admin}
                             : (${#authorization.expr('hasAuthority(''USER'')')} ? ~{menu::menu-user}
