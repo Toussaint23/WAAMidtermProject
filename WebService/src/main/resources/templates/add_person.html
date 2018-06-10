@@ -1,70 +1,121 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <style>
-            label{
-                display: block;
-                text-transform: uppercase;
-                font-weight: bold;
-                font-style: italic;
-            }
-            input, select{
-                width: 350px;
-                height: 25px;
-                margin-bottom: 15px;
-            }
-        </style>
-    </head>
-    <body>
-    <div th:replace="~{menu::menu-admin}">...</div>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-    <!--div th:replace="${#authentication.principal.isAdmin()} ? ~{fragments/footer :: footer-admin} : ~{fragments/footer :: footer-admin}">
-        &copy; 2016 The Static Templates
-    </div-->
-    <div style="margin: 30px 0px 0px 300px">
-        <h2>Add Account</h2>
-        <form method="post" action="/addperson" th:object="${person}">
-            <div>
-                <label for="firstname">Firstname</label>
-                <input name="firstName"  id="firstname" th:field="*{firstName}" required>
-            </div>
-            <div>
-                <label for="lastname">lastname</label>
-                <input name="lastName"  id="lastname" th:field="*{lastName}" required>
-            </div>
-            <div>
-                <label for="email">email</label>
-                <input name="email" id="email" th:field="*{email}" required>
-            </div>
-            <div>
-                <label for="city">City</label>
-                <input name="city" id="city" th:field="*{address.city}" required>
-            </div>
-            <div>
-                <label for="state">State</label>
-                <input name="state" id="state" th:field="*{address.state}" required>
-            </div>
-            <div>
-                <label for="country">Country</label>
-                <input name="country" id="country" th:field="*{address.country}" required>
-            </div>
-            <div>
-                <label for="zipcode">Zip Code</label>
-                <input name="zipcode" id="zipcode" th:field="*{address.zipcode}" required>
-            </div>
-            <div>
-                <label for="phone">phone</label>
-                <input name="phone"  id="phone" th:field="*{phone}" required>
-            </div>
-            <div>
-                <input name="enable" id="enable" value="true" required type="hidden">
-            </div>
-            <div>
-                <input  value="" th:value="#{person.button.add}" type="submit">
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form autocomplete="off" action="#" th:action="@{/registration}"
+                  th:object="${person}" method="post" class="form-horizontal"
+                  role="form">
+                <h2 th:text="#{label.menu.account}">Registration Form</h2>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                               class="validation-message"></label>
+                        <input type="text" th:field="*{firstName}" placeholder="First Name"
+                               class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                  class="validation-message"></label>
+                        <input type="text" th:field="*{lastName}"
+                               placeholder="Last Name" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label	th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"
+                                  class="validation-message"></label>
+                        <input type="text" th:field="*{address.city}"
+                               placeholder="City" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label	th:if="${#fields.hasErrors('address.state')}" th:errors="*{address.state}"
+                                  class="validation-message"></label>
+                        <input type="text" th:field="*{address.state}"
+                               placeholder="State" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label	th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}"
+                                  class="validation-message"></label>
+                        <input type="text" th:field="*{address.country}"
+                               placeholder="Country" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label	th:if="${#fields.hasErrors('address.zipcode')}" th:errors="*{address.zipcode}"
+                                  class="validation-message"></label>
+                        <input type="text" th:field="*{address.zipcode}"
+                               placeholder="Zip code" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label	th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+                                  class="validation-message"></label>
+                        <input type="text" th:field="*{phone}"
+                               placeholder="Phone" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{email}" placeholder="Email"
+                               class="form-control" /> <label
+                            th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="password" th:field="*{account.password}"
+                               placeholder="Password" class="form-control" /> <label
+                            th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"
+                            class="validation-message"></label>
+                        <input type="hidden" value="ADMIN" name="userType"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-primary btn-block" th:text="#{person.button.add}">Register User</button>
+                    </div>
+                </div>
+
+                <span th:utext="${successMessage}"></span>
+            </form>
+            <form th:action="@{/}" method="get" class="form-horizontal"
+                  role="form">
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button class="btn btn-basic btn-block" type="Submit" th:text="#{back.button}">Go To Login Page</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    </body>
+</div>
+
+</body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration Form</title>
+    <title>Personal Info</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form autocomplete="off" action="#" th:action="@{/registration}"
+            <form autocomplete="off" action="#" th:action="@{/editlocalperson}"
                   th:object="${person}" method="post" class="form-horizontal"
                   role="form">
                 <h2 th:text="#{label.menu.account}">Registration Form</h2>
@@ -87,29 +87,28 @@
                             class="validation-message"></label>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--div class="form-group">
                     <div class="col-sm-9">
                         <input type="password" th:field="*{account.password}"
                                placeholder="Password" class="form-control" /> <label
                             th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"
                             class="validation-message"></label>
-                        <input type="hidden" value="USER" name="userType"/>
                     </div>
-                </div>
+                </div-->
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <button type="submit" class="btn btn-primary btn-block" th:text="#{person.button.add}">Register User</button>
+                        <button type="submit" class="btn btn-primary btn-block" th:text="#{person.button.edit}">Register User</button>
                     </div>
                 </div>
 
                 <span th:utext="${successMessage}"></span>
             </form>
-            <form th:action="@{/login}" method="get" class="form-horizontal"
+            <form th:action="@{/}" method="get" class="form-horizontal"
                   role="form">
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <button class="btn btn-basic btn-block" type="Submit" th:text="#{account.button.login}">Go To Login Page</button>
+                        <button class="btn btn-basic btn-block" type="Submit" th:text="#{back.button}">Go To Login Page</button>
                     </div>
                 </div>
             </form>

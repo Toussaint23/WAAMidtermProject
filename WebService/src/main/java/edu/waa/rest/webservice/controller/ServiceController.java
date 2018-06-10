@@ -20,53 +20,53 @@ public class ServiceController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping(value = "/newproduct")
+    @PostMapping(value = "/rest/newproduct")
     public Product addProduct(@RequestBody Product product) {
         return productService.save(product);
     }
 
-    @GetMapping(value = "/listproduct")
+    @GetMapping(value = "/rest/listproduct")
     public List<Product> allProduct(){
         return  productService.getAllProduct();
     }
 
-    @GetMapping(value = "/findproduct/{id}")
+    @GetMapping(value = "/rest/findproduct/{id}")
     public @ResponseBody Product findProductById(@PathVariable int id){
         return productService.getProduct(id);
     }
-    @PutMapping(value = "/updateproduct/{id}")
+    @PutMapping(value = "/rest/updateproduct/{id}")
     public boolean updateProduct(@PathVariable int id, @RequestBody Product newProduct){
         Product oldProduct = productService.getProduct(id);
         return productService.updateProduct(oldProduct, newProduct);
     }
 
-    @DeleteMapping(value = "/deleteproduct/{id}")
+    @DeleteMapping(value = "/rest/deleteproduct/{id}")
     public @ResponseBody Product deleteProduct(@PathVariable int id){
         return productService.deleteProduct(id);
     }
 
-    @PostMapping(value = "/newperson")
+    @PostMapping(value = "/rest/newperson")
     public @ResponseBody Person addPerson(@RequestBody Person person) {
         return personService.savePerson(person);
     }
 
-    @GetMapping(value = "/listperson")
+    @GetMapping(value = "/rest/listperson")
     public List<Person> allPerson(){
         return  personService.getAllPerson();
     }
 
-    @PutMapping(value = "/updateperson/{id}")
+    @PutMapping(value = "/rest/updateperson/{id}")
     public boolean updatePerson(@PathVariable long id, @RequestBody Person newPerson){
         Person oldPerson = personService.findById(id);
         return personService.updatePerson(oldPerson, newPerson);
     }
 
-    @PostMapping(value = "/neworder")
+    @PostMapping(value = "/rest/neworder")
     public Order addOrder(@RequestBody Order order) {
         return orderService.save(order);
     }
 
-    @GetMapping(value = "/listorder")
+    @GetMapping(value = "/rest/listorder")
     public List<Order> allOrder(){
         return  orderService.findAll();
     }

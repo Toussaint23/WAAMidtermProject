@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form autocomplete="off" action="#" th:action="@{/registration}"
-                  th:object="${person}" method="post" class="form-horizontal"
+                  th:object="${order}" method="post" class="form-horizontal"
                   role="form">
                 <h2 th:text="#{label.menu.account}">Registration Form</h2>
                 <div class="form-group">
@@ -93,7 +93,7 @@
                                placeholder="Password" class="form-control" /> <label
                             th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}"
                             class="validation-message"></label>
-                        <input type="hidden" value="USER" name="userType"/>
+                        <input type="hidden" value="ADMIN" name="userType"/>
                     </div>
                 </div>
 
@@ -105,11 +105,11 @@
 
                 <span th:utext="${successMessage}"></span>
             </form>
-            <form th:action="@{/login}" method="get" class="form-horizontal"
+            <form th:action="@{/}" method="get" class="form-horizontal"
                   role="form">
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <button class="btn btn-basic btn-block" type="Submit" th:text="#{account.button.login}">Go To Login Page</button>
+                        <button class="btn btn-basic btn-block" type="Submit" th:text="#{back.button}">Go To Login Page</button>
                     </div>
                 </div>
             </form>

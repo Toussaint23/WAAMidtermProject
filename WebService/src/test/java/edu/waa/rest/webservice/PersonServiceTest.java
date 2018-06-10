@@ -76,15 +76,15 @@ public class PersonServiceTest {
 
 	@Test
 	public void testFindByEmail() {
-		List<Person> persons = personService.findByEmail("SOMETHING ELSE");
-		if (!persons.isEmpty()) {
+		Person persons = personService.findByEmail("SOMETHING ELSE");
+		if (persons == null) {
 			fail("Not expected to match Person");
 		}
-		for (Person saved : personService.findByEmail(testPerson[1].getAccount().getEmail())) {
-			if (!saved.getAccount().getEmail().equals(testPerson[1].getAccount().getEmail())) {
+		//for (Person saved : personService.findByEmail(testPerson[1].getAccount().getEmail())) {
+			if (!persons.getAccount().getEmail().equals(testPerson[1].getAccount().getEmail())) {
 				fail("Retrieved Person values are different");
 			}
-		}
+		//}
 	}
 
 	@Test

@@ -1,8 +1,10 @@
 package edu.waa.rest.webservice.controller;
 
-import edu.waa.rest.webservice.domain.*;
+import edu.waa.rest.webservice.domain.Order;
+import edu.waa.rest.webservice.domain.Person;
+import edu.waa.rest.webservice.domain.User;
+import edu.waa.rest.webservice.service.OrderService;
 import edu.waa.rest.webservice.service.PersonService;
-import edu.waa.rest.webservice.service.ProductService;
 import edu.waa.rest.webservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,24 +18,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
-public class PersonController {
+public class OrderController {
 	@Autowired
-	PersonService personService;
+	OrderService orderService;
 
 	@Autowired
 	UserService userService;
 
-	@GetMapping({"/addperson"})
+	@GetMapping({"/addorder"})
 	public String addPersonView(Model model) {
-		model.addAttribute("person", new Person());
-		return "add_person";
+		model.addAttribute("order", new Order());
+		return "add_ordern";
 	}
 
-	@PostMapping({"/registration"})
+	/*@PostMapping({"/registration"})
 	public String createNewUser(@Valid Person person, BindingResult bindingResult, Model model, @RequestParam String userType) {
 		User userExists = userService.findUserByEmail(person.getEmail());
 		System.out.println(userType);
@@ -100,5 +101,5 @@ public class PersonController {
 	public String deletePerson(@PathVariable long id) {
 		personService.removePerson(personService.findById(id));
 		return"redirect:/listpersons";
-	}
+	}*/
 }

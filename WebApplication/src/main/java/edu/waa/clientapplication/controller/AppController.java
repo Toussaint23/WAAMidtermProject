@@ -22,7 +22,7 @@ public class AppController {
 
     @GetMapping(value = "/welcome")
     public String welcomePage(Model model){
-        final String url = "http://localhost:8080/listproduct";
+        final String url = "http://localhost:8080/rest/listproduct";
         List<Product> products = restTemplate.getForObject(url, List.class);
         model.addAttribute("products", products);
         return "list_products";
@@ -38,7 +38,7 @@ public class AppController {
     @PostMapping(value = "/addproduct")
     public String addProduct(Product newProduct, Model model){
         String view = "/addproduct";
-        final String url = "http://localhost:8080/newproduct";
+        final String url = "http://localhost:8080/rest/newproduct";
         Product product = restTemplate.postForObject(url, newProduct, Product.class);
         if(product != null){
             model.addAttribute("product", product);
@@ -49,7 +49,7 @@ public class AppController {
 
     @GetMapping(value = "/editproduct/{id}")
     public String editProductView(@PathVariable int id,  Model model){
-        final String url = "http://localhost:8080/findproduct/"+id;
+        final String url = "http://localhost:8080/rest/findproduct/"+id;
         Product product = restTemplate.getForObject(url, Product.class);
         model.addAttribute("product", product);
         model.addAttribute("productType", ProductType.values());
@@ -58,14 +58,14 @@ public class AppController {
 
     @PostMapping(value = "/editproduct/{id}")
     public String editProduct(@PathVariable int id, Product newProduct, Model model){
-        final String url = "http://localhost:8080/updateproduct/"+id;
+        final String url = "http://localhost:8080/rest/updateproduct/"+id;
         restTemplate.put(url, newProduct);
         return "redirect:/";
     }
 
     @GetMapping(value = "/deleteproduct/{id}")
     public String deleteProductView(@PathVariable int id,  Model model){
-        final String url = "http://localhost:8080/findproduct/"+id;
+        final String url = "http://localhost:8080/rest/findproduct/"+id;
         Product product = restTemplate.getForObject(url, Product.class);
         model.addAttribute("product", product);
         model.addAttribute("productType", ProductType.values());
@@ -74,7 +74,7 @@ public class AppController {
 
     @PostMapping(value = "/deleteproduct/{id}")
     public String deleteProduct(@PathVariable int id){
-        final String url = "http://localhost:8080/deleteproduct/"+id;
+        final String url = "http://localhost:8080/rest/deleteproduct/"+id;
         restTemplate.delete(url);
         return "redirect:/";
     }
