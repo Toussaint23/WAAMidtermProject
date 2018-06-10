@@ -3,6 +3,7 @@ package edu.waa.rest.webservice.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Address {
@@ -10,9 +11,13 @@ public class Address {
 	@Id
 	@GeneratedValue
 	private int id;
+	@NotEmpty
 	private String city;
+	@NotEmpty
 	private String state;
+	@NotEmpty
 	private String country;
+	@NotEmpty
 	private String zipcode;
 
 	public String getCity() {

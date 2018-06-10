@@ -2,6 +2,8 @@ package edu.waa.rest.webservice.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -9,25 +11,22 @@ public class Person {
 	@Id
 	@GeneratedValue
 	private long id;
+	@NotEmpty
 	private String firstName;
+	@NotEmpty
 	private String lastName;
-	@Email
-	private String email;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User account;
+	@NotEmpty
 	private String phone;
-	private boolean enable;
+	@org.hibernate.validator.constraints.Email(message = "*Please provide a valid Email")
+	@org.hibernate.validator.constraints.NotEmpty(message = "*Please provide an email")
+	private String email;
 
 	public long getId() {
 		return id;
-	}
-
-	public boolean isEnable() {
-		return enable;
-	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
 	}
 
 	public String getFirstName() {
@@ -46,20 +45,20 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public User getAccount() {
+		return account;
+	}
+
+	public void setAccount(User account) {
+		this.account = account;
 	}
 
 	public String getPhone() {
@@ -70,4 +69,11 @@ public class Person {
 		this.phone = phone;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

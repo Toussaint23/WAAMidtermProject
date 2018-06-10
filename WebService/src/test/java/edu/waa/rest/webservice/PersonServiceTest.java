@@ -6,6 +6,7 @@ import java.util.List;
 
 import edu.waa.rest.webservice.domain.Address;
 import edu.waa.rest.webservice.domain.Person;
+import edu.waa.rest.webservice.domain.User;
 import edu.waa.rest.webservice.service.PersonService;
 import org.junit.After;
 import org.junit.Before;
@@ -36,8 +37,12 @@ public class PersonServiceTest {
 
 		for (int i = 0; i < TEST_NumberOfPersons; i++) {
 			Person person = new Person();
-			person.setEmail(i + "test@email.com");
-			person.setEnable((i % 2 == 0));
+			/*person.setEmail(i + "test@email.com");
+			person.setEnable((i % 2 == 0));*/
+			person.setAccount(new User());
+			person.getAccount().setEnable((i % 2) == 0);
+			person.getAccount().setEmail(i + "test@email.com");
+			person.getAccount().setPassword("1234");
 			person.setFirstName("firstName Test" + i);
 			person.setLastName("lastName Test" + i);
 			person.setPhone("111888777" + i);
@@ -75,8 +80,8 @@ public class PersonServiceTest {
 		if (!persons.isEmpty()) {
 			fail("Not expected to match Person");
 		}
-		for (Person saved : personService.findByEmail(testPerson[1].getEmail())) {
-			if (!saved.getEmail().equals(testPerson[1].getEmail())) {
+		for (Person saved : personService.findByEmail(testPerson[1].getAccount().getEmail())) {
+			if (!saved.getAccount().getEmail().equals(testPerson[1].getAccount().getEmail())) {
 				fail("Retrieved Person values are different");
 			}
 		}
@@ -120,7 +125,7 @@ public class PersonServiceTest {
 		if (!a.getLastName().equals(b.getLastName())) {
 			return false;
 		}
-		if (!a.getEmail().equals(b.getEmail())) {
+		if (!a.getAccount().getEmail().equals(b.getAccount().getEmail())) {
 			return false;
 		}
 		if (!a.getPhone().equals(b.getPhone())) {

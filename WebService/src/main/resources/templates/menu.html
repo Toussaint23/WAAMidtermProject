@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
     </head>
     <body>
+
+         <!--h1 sec:authorize="isAuthenticated()" th:fragment="welcome">
+                | Logged user: <span sec:authentication="name" th:text="${principal.username}"></span> |
+                Roles: <span sec:authentication="principal.authorities" th:text="principal.name"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+         </h1-->
 
         <div th:fragment="menu-admin" style="float: left">
             <h2>Menu</h2>

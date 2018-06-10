@@ -1,18 +1,18 @@
 package edu.waa.rest.webservice.controller;
 
-import edu.waa.rest.webservice.domain.Address;
-import edu.waa.rest.webservice.domain.Person;
-import edu.waa.rest.webservice.domain.Product;
-import edu.waa.rest.webservice.domain.ProductType;
+import edu.waa.rest.webservice.domain.*;
 import edu.waa.rest.webservice.service.PersonService;
 import edu.waa.rest.webservice.service.ProductService;
+import edu.waa.rest.webservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -20,10 +20,31 @@ public class PersonController {
 	@Autowired
 	PersonService personService;
 
+	@Autowired
+	UserService userService;
+
 	@GetMapping({"/addperson"})
 	public String addPersonView(Model model) {
 		model.addAttribute("person", new Person());
 		return "add_person";
+	}
+
+	@PostMapping({"/registration"})
+	public String createNewUser(@Valid Person person, BindingResult bindingResult, Model model) {
+		User userExists = userService.findUserByEmail(person.getEmail());
+		String view = "registration";
+		if (userExists != null) {
+			bindingResult
+					.rejectValue("email", "error.user",
+							"There is already a user registered with the email provided");
+		}
+		if (!bindingResult.hasErrors()) {
+			userService.setUser(person.getAccount(), "ADMIN", person.getEmail());
+			personService.savePerson(person);
+			model.addAttribute("successMessage", "User has been registered successfully");
+			model.addAttribute("person", new Person());
+		}
+		return view;
 	}
 
 	@PostMapping({"/addperson"})

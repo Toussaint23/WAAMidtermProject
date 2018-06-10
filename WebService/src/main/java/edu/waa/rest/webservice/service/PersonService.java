@@ -40,8 +40,7 @@ public class PersonService {
 			old.setPhone(person.getPhone());
 			old.setLastName(person.getLastName());
 			old.setFirstName(person.getFirstName());
-			old.setEnable(person.isEnable());
-			old.setEmail(person.getEmail());
+			old.setAccount(person.getAccount());
 			old.setAddress(person.getAddress());
 			result = true;
 		}

@@ -166,8 +166,12 @@ public class OrderServiceTest {
 
 		for (int i = 0; i < TEST_NumberOfPersons; i++) {
 			Person person = new Person();
-			person.setEmail(i + "test@email.com");
-			person.setEnable((i % 2 == 0));
+			/*person.setEmail(i + "test@email.com");
+			person.setEnable((i % 2 == 0));*/
+			person.setAccount(new User());
+			person.getAccount().setEnable((i % 2) == 0);
+			person.getAccount().setEmail(i + "test@email.com");
+			person.getAccount().setPassword("1234");
 			person.setFirstName("firstName Test" + i);
 			person.setLastName("lastName Test" + i);
 			person.setPhone("111888777" + i);
